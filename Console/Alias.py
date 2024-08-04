@@ -1,6 +1,5 @@
 
 from .Colors import Color, Colored
-from dataclasses import dataclass
 from typing import Optional
 
 
