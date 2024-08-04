@@ -30,7 +30,7 @@ class ConsoleObject:
         self.plugins  : dict  = plugins
         self.parser   : Optional[Callable] = parser
     
-    def __call__[ PrintsToConsole ]( self, *parts:str, sep:str = " ", pSep:str = ":" ) -> PrintsToConsole:
+    def __call__[ PrintsToConsole ]( self, *parts:str, sep:str = " ", pSep:str = " " ) -> PrintsToConsole:
         parsedPart:str = sep.join( parts )
         if self.parser != None:
             parsedPart:str = self.parser( parsedPart, textColor = self.textColor, highColor = self.highColor )

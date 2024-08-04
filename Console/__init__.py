@@ -47,4 +47,3 @@ class Console:
         text = GRAY, highlight = GREEN, parser=highlightParser,
         **commonPlugins
     )
-
