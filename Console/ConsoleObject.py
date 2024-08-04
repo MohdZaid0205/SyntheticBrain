@@ -31,10 +31,9 @@ class ConsoleObject:
         self.parser   : Optional[Callable] = parser
     
     def __call__[ PrintsToConsole ]( self, *parts:str, sep:str = " ", pSep:str = ":" ) -> PrintsToConsole:
+        parsedPart:str = sep.join( parts )
         if self.parser != None:
-            parsedPart:str = self.parser( *parts, textColor = self.textColor, highColor = self.highColor )
-        else:
-            parsedPart:str = sep.join( parts )
+            parsedPart:str = self.parser( parsedPart, textColor = self.textColor, highColor = self.highColor )
         
         pluginStack:list = arrangePlugins( **self.plugins )
         parsedPlugins = pSep.join([
