@@ -8,8 +8,8 @@ def arrangePlugins[ Plugin ]( **plugins:Plugin ) -> list[Plugin]:
     for plugin in plugins:
         appendIndex:int = 0
         for index, arranged in enumerate(pluginStack):
-            if plugin[0] < arranged[0]:
-                appendIndex = index - 1
+            if plugins[plugin][0] < plugins[arranged][0]:
+                appendIndex = index
             else:
                 appendIndex = index + 1
         pluginStack.insert( appendIndex, plugin )
@@ -41,4 +41,4 @@ class ConsoleObject:
             Colored.coloredForeground( self.plugins[plugin][1](), self.plugins[plugin][2] ) for plugin in pluginStack
         ])
 
-        print( f"{self.textAlias} : {parsedPlugins} : {parsedPart}" )
+        print( f"{self.textAlias}:{parsedPlugins}: {parsedPart}" )
