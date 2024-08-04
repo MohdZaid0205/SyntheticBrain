@@ -16,6 +16,6 @@ class Alias:
         self.__uncolored_alias = f"[{ name.title().center( width - 2 ) }]"
         self.__colored_alias   = Colored.coloredText(self.__uncolored_alias, fore, back)
 
-    def __str__[ ColoredAlias ]( self ) -> ColoredAlias:
+    def __str__( self ) -> str:
         return self.__colored_alias if self.__is_color_active else self.__uncolored_alias
     
