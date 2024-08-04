@@ -12,7 +12,7 @@ def arrangePlugins[ Plugin ]( **plugins:Plugin ) -> list[Plugin]:
                 appendIndex = index - 1
             else:
                 appendIndex = index + 1
-        pluginStack.append( plugin, appendIndex )
+        pluginStack.insert( appendIndex, plugin )
     return pluginStack
 
 
@@ -21,22 +21,24 @@ class ConsoleObject:
     def __init__[ zIndex ](
             self, name:str, fore:Color, back:Color,
             text:Color, highlight:Color,
+            parser:Optional[Callable] = None,
             **plugins:tuple[zIndex,Callable,Color]
         ) -> None:
         self.highColor: Color = highlight
         self.textColor: Color = text
         self.textAlias: Alias = Alias( name, 15, fore, back )
         self.plugins  : dict  = plugins
+        self.parser   : Optional[Callable] = parser
     
-    def __call__[ PrintsToConsole ]( self, *parts:str, parser:Callable = None ) -> PrintsToConsole:
-        if parser != None:
-            parsedPart:str = parser( *parts, textColor = self.textColor, highColor = self.highColor )
+    def __call__[ PrintsToConsole ]( self, *parts:str, sep:str = " ", pSep:str = ":" ) -> PrintsToConsole:
+        if self.parser != None:
+            parsedPart:str = self.parser( *parts, textColor = self.textColor, highColor = self.highColor )
         else:
-            parsedPart:str = " ".join( parts )
+            parsedPart:str = sep.join( parts )
         
-        pluginStack:list = arrangePlugins( self.plugins )
-        parsedPlugins = ":".join([
-            Colored.coloredForeground( self.plugins[plugin](), self.plugins[plugin] ) for plugin in pluginStack
+        pluginStack:list = arrangePlugins( **self.plugins )
+        parsedPlugins = pSep.join([
+            Colored.coloredForeground( self.plugins[plugin][1](), self.plugins[plugin][2] ) for plugin in pluginStack
         ])
 
-        print( f"{self.textAlias}:{parsedPlugins} => {parsedPart}" )
+        print( f"{self.textAlias} : {parsedPlugins} : {parsedPart}" )
