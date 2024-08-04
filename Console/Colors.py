@@ -2,6 +2,10 @@
 from dataclasses import dataclass
 from typing import Optional
 
+import os
+os.system( "colors" )
+
+
 @dataclass
 class Color:
 
