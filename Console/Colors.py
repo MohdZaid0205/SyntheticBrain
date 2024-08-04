@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from typing import Optional
 
 import os
-os.system( "colors" )
+os.system( "color" )
 
 
 @dataclass
