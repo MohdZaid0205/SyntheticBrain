@@ -17,7 +17,6 @@ VIOLET  = Color.fromHEX('#bd93f9')
 ORANGE  = Color.fromHEX('#ffb86c')
 
 commonPlugins:dict = {
-    "datePlugin": ( 10, getCurrentDate, GRAY ),
     "timePlugin": ( 20, getCurrentTime, GRAY ),
 }
 
