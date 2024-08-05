@@ -6,6 +6,7 @@ import sqlite3
 import os
 
 
+# Make sure this path is properly setup.
 DatabaseFolder: os.path = "Temp\\Database"
 if not os.path.exists( DatabaseFolder ):
     Console.Warning( f"*Database folder* is currently *Absent* from Temp folder." )
